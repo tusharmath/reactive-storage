@@ -1,0 +1,19 @@
+{
+  "name": "reactive-storage",
+  "version": "1.0.0",
+  "description": "A library to assist in having a reactive immutable storage as a stream",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "tusharmath@gmail.com",
+  "license": "ISC",
+  "devDependencies": {
+    "babel": "^5.8.23",
+    "chai": "^3.3.0"
+  },
+  "dependencies": {
+    "rx": "^4.0.6",
+    "seamless-immutable": "^4.0.1"
+  }
+}
