@@ -40,7 +40,8 @@ class Storage {
       return this.stream.distinctUntilChanged(x => _.get(x, path))
         .map(x => ({[key]: _.get(x, path)}))
     }
-    return Rx.Observable.merge(_.map(selector, selectPaths))
+    var observables = _.map(selector, selectPaths)
+    return observables.length > 0 ? Rx.Observable.merge(observables) : this.stream
   }
 }
 

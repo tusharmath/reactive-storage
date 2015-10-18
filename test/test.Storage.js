@@ -61,11 +61,12 @@ describe('Storage', function () {
   })
   describe('connect()', function () {
     beforeEach(function () {
-      this.store = new Storage({
+      this.init = {
         a: {aa: {aaa: 1}},
         b: {bb: {bbb: 100}},
         c: {cc: {ccc: 1000}}
-      })
+      }
+      this.store = new Storage(this.init)
     })
     it('can selectively connect to paths', function () {
       const output = []
@@ -82,6 +83,13 @@ describe('Storage', function () {
         {a: 2}, {a: 3},
         {c: {ccc: 2000}}
       ])
+    })
+
+    it('returns value stream if no path is provided', function () {
+      var value
+      this.store.connect().subscribe(x => value = x)
+      value.should.deep.equal(this.init)
+      value.should.not.equal(this.init)
     })
   })
 })
