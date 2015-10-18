@@ -59,4 +59,29 @@ describe('Storage', function () {
       this.output.a.b.c.should.equal(-2)
     })
   })
+  describe('listen()', function () {
+    beforeEach(function () {
+      this.store = new Storage({
+        a: {aa: {aaa: 1}},
+        b: {bb: {bbb: 100}},
+        c: {cc: {ccc: 1000}}
+      })
+    })
+    it('can selectively listen to paths', function () {
+      const output = []
+      this.store
+        .listen({a: 'a.aa.aaa', c: 'c.cc'})
+        .subscribe(x => output.push(x))
+      this.store.updatePath('a.aa.aaa', 2)
+      this.store.updatePath('a.aa.aaa', 3)
+
+      this.store.updatePath('b.bb.bbb', 200)
+      this.store.updatePath('c.cc.ccc', 2000)
+      output.should.deep.equal([
+        {a: 1}, {c: {ccc: 1000}},
+        {a: 2}, {a: 3},
+        {c: {ccc: 2000}}
+      ])
+    })
+  })
 })
