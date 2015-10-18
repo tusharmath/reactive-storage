@@ -5,12 +5,12 @@ describe('Storage', function () {
     this.init = {a: {b: {c: 1}}}
     this.store = new Storage(this.init)
     this.output = null
-    this.store.stream.subscribe(x => this.output = x)
+    this.store._stream.subscribe(x => this.output = x)
   })
 
   describe('updateStore()', function () {
     it('sets initial values', function () {
-      this.store.value.should.deep.equal(this.init)
+      this.store._value.should.deep.equal(this.init)
     })
     it('updates the store', function () {
       this.store.updateStore({a: 2})
