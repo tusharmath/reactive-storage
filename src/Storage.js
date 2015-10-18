@@ -35,7 +35,7 @@ class Storage {
     return this.updatePath(path, value - 1)
   }
 
-  listen (selector) {
+  connect (selector) {
     const selectPaths = (path, key) => {
       return this.stream.distinctUntilChanged(x => _.get(x, path))
         .map(x => ({[key]: _.get(x, path)}))

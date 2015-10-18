@@ -59,7 +59,7 @@ describe('Storage', function () {
       this.output.a.b.c.should.equal(-2)
     })
   })
-  describe('listen()', function () {
+  describe('connect()', function () {
     beforeEach(function () {
       this.store = new Storage({
         a: {aa: {aaa: 1}},
@@ -67,10 +67,10 @@ describe('Storage', function () {
         c: {cc: {ccc: 1000}}
       })
     })
-    it('can selectively listen to paths', function () {
+    it('can selectively connect to paths', function () {
       const output = []
       this.store
-        .listen({a: 'a.aa.aaa', c: 'c.cc'})
+        .connect({a: 'a.aa.aaa', c: 'c.cc'})
         .subscribe(x => output.push(x))
       this.store.updatePath('a.aa.aaa', 2)
       this.store.updatePath('a.aa.aaa', 3)
