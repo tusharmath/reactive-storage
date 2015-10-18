@@ -26,5 +26,9 @@ class Storage {
     const value = _.get(this.value, path)
     return this.updatePath(path, value + 1)
   }
+  decrementPath(path) {
+    const value = _.get(this.value, path)
+    return this.updatePath(path, value - 1)
+  }
 }
 exports.Storage = Storage

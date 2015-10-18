@@ -50,4 +50,13 @@ describe('Storage', function () {
       this.output.a.b.c.should.equal(4)
     })
   })
+  describe('decrementPath()', function () {
+    it('increments path', function () {
+      this.store.decrementPath('a.b.c')
+      this.output.a.b.c.should.equal(0)
+      this.store.decrementPath('a.b.c')
+      this.store.decrementPath('a.b.c')
+      this.output.a.b.c.should.equal(-2)
+    })
+  })
 })
