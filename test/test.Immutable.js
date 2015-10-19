@@ -24,7 +24,7 @@ describe('Immutable', function () {
     it('converts immutable list to JS version', function () {
       var obj = [10, 20, 30, 40]
       var immutable = createImmutable(obj)
-      toJS(immutable).should.deep.equal({0: 10, 1: 20, 2: 30, 3: 40})
+      toJS(immutable).should.deep.equal([10, 20, 30, 40])
     })
   })
 })
