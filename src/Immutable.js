@@ -4,16 +4,23 @@
 
 'use strict'
 const Immutable = require('immutable')
+const _ = require('lodash')
 
+const isIterable = x => x instanceof Immutable.Iterable
+const getIterableType = (frozen) => _.find(['Map', 'List'], v => frozen instanceof Immutable[v])
+const createProxyObject = (frozen) => {
+  switch (getIterableType(frozen)) {
+    case 'Map':
+      return {}
+    case 'List':
+      return []
+  }
+}
 function toJS (frozen) {
-  if (frozen instanceof Immutable.Map === false && frozen instanceof Immutable.List === false) {
+  if (!isIterable(frozen)) {
     return frozen
   }
-
-  var js = {}
-  if (frozen instanceof Immutable.List) {
-    js = []
-  }
+  var js = createProxyObject(frozen)
   const keys = frozen.keys()
   for (let i of keys) {
     Object.defineProperty(js, i, {
