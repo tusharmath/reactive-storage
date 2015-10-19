@@ -1,4 +1,4 @@
-# Reactive Storage
+# Reactive Storage [![Build Status](https://travis-ci.org/tusharmath/reactive-storage.svg?branch=master)](https://travis-ci.org/tusharmath/reactive-storage)
 
 As the application grows, it become difficult to debug the state of the application. Having a single source of truth simplifies the complete process. Reactive Storage, create a store that is exposed as an observable so that the dependent components are automatically notified when the state of the application changes.
 
