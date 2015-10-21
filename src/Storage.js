@@ -4,7 +4,7 @@ import Immutable from 'seamless-immutable'
 import Rx from 'rx'
 import _ from 'lodash'
 
-class Storage {
+export class Storage {
   constructor(value) {
     this._value = Immutable(value)
     this._stream = new Rx.BehaviorSubject(this._value)
@@ -44,5 +44,3 @@ class Storage {
     return observables.length > 0 ? Rx.Observable.merge(observables) : this._stream
   }
 }
-
-exports.Storage = Storage
