@@ -2,7 +2,7 @@
   "name": "reactive-storage",
   "version": "1.0.0",
   "description": "A library to assist in having a reactive immutable storage as a stream",
-  "main": "index.js",
+  "main": "src/Storage.js",
   "scripts": {
     "test": "mocha"
   },
