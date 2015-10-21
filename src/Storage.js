@@ -1,41 +1,41 @@
 'use strict'
 
-const Immutable = require('seamless-immutable')
-const Rx = require('rx')
-const _ = require('lodash')
+import Immutable from 'seamless-immutable'
+import Rx from 'rx'
+import _ from 'lodash'
 
 class Storage {
-  constructor (value) {
+  constructor(value) {
     this._value = Immutable(value)
     this._stream = new Rx.BehaviorSubject(this._value)
   }
 
-  updateStore (value) {
+  updateStore(value) {
     this._value = this._value.merge(value, {deep: true})
     this._stream.onNext(this._value)
     return this._value
   }
 
-  updatePath (path, value) {
+  updatePath(path, value) {
     return this.updateStore(_.set({}, path, value))
   }
 
-  togglePath (path) {
+  togglePath(path) {
     const value = Boolean(_.get(this._value, path))
     return this.updatePath(path, !value)
   }
 
-  incrementPath (path) {
+  incrementPath(path) {
     const value = _.get(this._value, path)
     return this.updatePath(path, value + 1)
   }
 
-  decrementPath (path) {
+  decrementPath(path) {
     const value = _.get(this._value, path)
     return this.updatePath(path, value - 1)
   }
 
-  connect (selector) {
+  connect(selector) {
     const selectPaths = (path, key) => {
       return this._stream.distinctUntilChanged(x => _.get(x, path))
         .map(x => ({[key]: _.get(x, path)}))
