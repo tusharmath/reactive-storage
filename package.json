@@ -2,7 +2,7 @@
   "name": "reactive-storage",
   "version": "1.0.3",
   "description": "A library to assist in having a reactive immutable storage as a stream",
-  "main": "dist/index.js",
+  "main": ".dist/Storage.js",
   "scripts": {
     "test": "mocha",
     "postinstall": "node ./node_modules/babel/bin/babel.js src --out-dir .dist"

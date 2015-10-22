@@ -2,7 +2,7 @@
 
 import SeamlessImmutable from 'seamless-immutable'
 import { BehaviorSubject, Observable } from 'rx'
-import _ from 'lodash'
+import { get, set, map } from 'lodash'
 
 const createImmutable = (value) => SeamlessImmutable(value)
 
@@ -19,30 +19,30 @@ export class Storage {
   }
 
   updatePath(path, value) {
-    return this.updateStore(_.set({}, path, value))
+    return this.updateStore(set({}, path, value))
   }
 
   togglePath(path) {
-    const value = Boolean(_.get(this._value, path))
+    const value = Boolean(get(this._value, path))
     return this.updatePath(path, !value)
   }
 
   incrementPath(path) {
-    const value = _.get(this._value, path)
+    const value = get(this._value, path)
     return this.updatePath(path, value + 1)
   }
 
   decrementPath(path) {
-    const value = _.get(this._value, path)
+    const value = get(this._value, path)
     return this.updatePath(path, value - 1)
   }
 
   connect(selector) {
     const selectPaths = (path, key) => {
-      return this._stream.distinctUntilChanged(x => _.get(x, path))
-        .map(x => ({[key]: _.get(x, path)}))
+      return this._stream.distinctUntilChanged(x => get(x, path))
+        .map(x => ({[key]: get(x, path)}))
     }
-    var observables = _.map(selector, selectPaths)
+    var observables = map(selector, selectPaths)
     return observables.length > 0 ? Observable.merge(observables) : this._stream
   }
 }
