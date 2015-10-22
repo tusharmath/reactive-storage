@@ -1,13 +1,13 @@
 'use strict'
 
 import Immutable from 'seamless-immutable'
-import Rx from 'rx'
+import { BehaviorSubject, Observable } from 'rx'
 import _ from 'lodash'
 
 export class Storage {
   constructor(value) {
     this._value = Immutable(value)
-    this._stream = new Rx.BehaviorSubject(this._value)
+    this._stream = new BehaviorSubject(this._value)
   }
 
   updateStore(value) {
@@ -41,6 +41,6 @@ export class Storage {
         .map(x => ({[key]: _.get(x, path)}))
     }
     var observables = _.map(selector, selectPaths)
-    return observables.length > 0 ? Rx.Observable.merge(observables) : this._stream
+    return observables.length > 0 ? Observable.merge(observables) : this._stream
   }
 }
