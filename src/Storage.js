@@ -39,7 +39,9 @@ export class Storage {
 
   connect(selector) {
     const selectPaths = (path, key) => {
-      return this._stream.distinctUntilChanged(x => get(x, path))
+      return this._stream
+        .distinctUntilChanged(x => get(x, path))
+        .filter(x => undefined !== get(x, path))
         .map(x => ({[key]: get(x, path)}))
     }
     var observables = map(selector, selectPaths)

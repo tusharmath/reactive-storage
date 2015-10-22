@@ -91,5 +91,10 @@ describe('Storage', function () {
       value.should.deep.equal(this.init)
       value.should.not.equal(this.init)
     })
+    it('ignores undefined values', function () {
+      var value
+      this.store.connect({x: 'w'}).subscribe(x => value = x)
+      expect(value).to.be.undefined
+    })
   })
 })
