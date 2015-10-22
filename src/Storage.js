@@ -1,12 +1,14 @@
 'use strict'
 
-import Immutable from 'seamless-immutable'
+import SeamlessImmutable from 'seamless-immutable'
 import { BehaviorSubject, Observable } from 'rx'
 import _ from 'lodash'
 
+const createImmutable = (value) => SeamlessImmutable(value)
+
 export class Storage {
   constructor(value) {
-    this._value = Immutable(value)
+    this._value = createImmutable(value)
     this._stream = new BehaviorSubject(this._value)
   }
 
