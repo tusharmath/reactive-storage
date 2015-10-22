@@ -1,6 +1,6 @@
 {
   "name": "reactive-storage",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "A library to assist in having a reactive immutable storage as a stream",
   "main": ".dist/Storage.js",
   "scripts": {
@@ -11,7 +11,7 @@
   "license": "ISC",
   "devDependencies": {
     "chai": "^3.3.0",
-    "babel": "^5.8.23"  
+    "babel": "^5.8.23"
   },
   "dependencies": {
     "lodash": "^3.10.1",
