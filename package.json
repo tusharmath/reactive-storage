@@ -9,14 +9,15 @@
   "author": "tusharmath@gmail.com",
   "license": "ISC",
   "devDependencies": {
-    "babelify": "^6.4.0",
-    "browserify": "^11.2.0",
-    "chai": "^3.3.0",
-    "gulp": "^3.9.0"
+    "babel": "^5.8.23",
+    "chai": "^3.3.0"
   },
   "dependencies": {
     "lodash": "^3.10.1",
     "rx": "^4.0.6",
     "seamless-immutable": "^4.0.1"
+  },
+  "standard":{
+    "globals": ["describe", "it", "beforeEach"]
   }
 }

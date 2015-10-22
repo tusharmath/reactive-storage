@@ -1,4 +1,4 @@
-const Storage = require('../src/Storage.js').Storage
+import { Storage } from '../src/Storage'
 
 describe('Storage', function () {
   beforeEach(function () {
