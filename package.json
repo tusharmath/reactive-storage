@@ -10,10 +10,10 @@
   "author": "tusharmath@gmail.com",
   "license": "ISC",
   "devDependencies": {
-    "babel": "^5.8.23",
     "chai": "^3.3.0"
   },
   "dependencies": {
+    "babel": "^5.8.23",
     "immutable": "^3.7.5",
     "lodash": "^3.10.1",
     "rx": "^4.0.6",
