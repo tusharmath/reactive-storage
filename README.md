@@ -55,3 +55,53 @@ Theere are other utility functions such as —
 
 - `incrementPath(path, delta)` & `decrementPath(path, delta)` : increases and decreases the value by `delta`. Default value is `1`
  
+
+## Example
+Though this module is not specific to [React](facebook.github.io/react/) here is an example of how you can use it in react.
+
+```javascript
+
+import {Storage} from 'reactive-storage'
+import {Component} from 'react'
+import moment from 'moment'
+ 
+// Set Initial values for the store
+const store = new Storage({start: Date.now(), end: Date.now()})
+
+// Mutate the store every 800 milliseconds
+setInterval(x=> store.updatePath('end', Date.now()), 800)
+
+// Create a react component
+class Time extends Component {
+
+  // Start Listening to the store as soon as it mounts
+  componentWillMount () {
+    this.disposable = store
+      // Listen to start and end properties
+      .connect({start: 'start', end: 'end'})
+      
+      // Add logic to calculate duration
+      .map(x => x.end - x.start)
+      
+      // Set the duration value into the state, for the component to re-render
+      .subscribe(duration => this.setState({duration}))
+  }
+  
+  // Stop Listening, else setState will be called though the component doesn't exist
+  componentWillUnmount () {
+    this.disposable.dispose()
+  }
+
+  render () {
+    // Humanize & render the duration value recieved in the state
+    const duration = moment.duration(this.state.duration).humanize()
+    return (
+      <div>
+        {duration}
+      <div>
+    )
+  }
+}
+
+```
+
