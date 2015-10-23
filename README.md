@@ -6,9 +6,10 @@ The project is heavily inspired by [redux](rackt.github.io/redux/) and flows the
 The only way to change the state tree is to emit an action, an object describing what happened.
 To specify how the actions transform the state tree, you write pure reducers.
 
-Reactive Storage is an opinionated version of redux.
-1. There are no reducers, instead store manipulations are optimized via [seamless-immutable](https://github.com/rtfeldman/seamless-immutable) this makes the change detection algorithm extremely fast.
-2. The store implements a version of [connect](https://github.com/rackt/redux/issues/419) by exposing it as an observable. You can attach an observer to various parts of the store and listen to real changes.
+Reactive Storage is an opinionated version of redux —
+
+1. There are no reducers, instead store manipulations are optimized via [seamless-immutable](https://github.com/rtfeldman/seamless-immutable) this (immutablility) also makes the change detection algorithm extremely fast.
+2. The store implements a version of [connect](https://github.com/rackt/redux/issues/419) by exposing it as an observable. You can attach an observer to various parts of the store and listen to actual changes.
 
 ### API
 ### constructor
