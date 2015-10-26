@@ -79,9 +79,10 @@ describe('Storage', function () {
       this.store.updatePath('b.bb.bbb', 200)
       this.store.updatePath('c.cc.ccc', 2000)
       output.should.deep.equal([
-        {a: 1}, {c: {ccc: 1000}},
-        {a: 2}, {a: 3},
-        {c: {ccc: 2000}}
+        {a: 1, c: {ccc: 1000}},
+        {a: 2, c: {ccc: 1000}},
+        {a: 3, c: {ccc: 1000}},
+        {a: 3, c: {ccc: 2000}}
       ])
     })
 
