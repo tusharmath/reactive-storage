@@ -31,6 +31,12 @@ describe('Storage', function () {
       const b = this.output
       a.should.equal(b)
     })
+    it('override values', function () {
+      const t = {x: {a: 1, b: 2, c: 3}}
+      const store = new Storage(t)
+      store.updateStore(t).should.deep.equal(t)
+      store.updateStore({x: {a: 1, c: 3}}, false).should.deep.equal({x: {a: 1, c: 3}})
+    })
   })
   describe('updatePath()', function () {
     it('updates on path', function () {

@@ -15,12 +15,11 @@ export class Storage {
     this._stream = new BehaviorSubject(this._value)
   }
 
-  updateStore (value) {
-    this._value = this._value.merge(value, {deep: true})
+  updateStore (value, deep = true) {
+    this._value = this._value.merge(value, {deep})
     this._stream.onNext(this._value)
     return this._value
   }
-
   updatePath (path, value) {
     return this.updateStore(set({}, path, value))
   }
