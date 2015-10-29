@@ -2,15 +2,15 @@ import { Storage } from '../src/Storage'
 
 describe('Storage', function () {
   beforeEach(function () {
-    this.init = {a: {b: {c: 1}}}
-    this.store = new Storage(this.init)
+    this.init = () => ({a: {b: {c: 1}}})
+    this.store = new Storage(this.init())
     this.output = null
     this.store._stream.subscribe(x => this.output = x)
   })
 
   describe('updateStore()', function () {
     it('sets initial values', function () {
-      this.store._value.should.deep.equal(this.init)
+      this.store._value.should.deep.equal(this.init())
     })
     it('updates the store', function () {
       this.store.updateStore({a: 2})
@@ -23,6 +23,13 @@ describe('Storage', function () {
     it('returns the new store', function () {
       this.store.updateStore({a: 120})
         .should.equal(this.output)
+    })
+    it('does not update the store', function () {
+      this.store.updateStore(this.init())
+      const a = this.output
+      this.store.updateStore(this.init())
+      const b = this.output
+      a.should.equal(b)
     })
   })
   describe('updatePath()', function () {
