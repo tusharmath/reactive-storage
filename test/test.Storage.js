@@ -1,16 +1,18 @@
-import { Storage } from '../src/Storage'
+import {Storage} from '../src/Storage'
+import Immutable from 'seamless-immutable'
+import {get, set} from 'lodash'
 
 describe('Storage', function () {
   beforeEach(function () {
-    this.init = () => ({a: {b: {c: 1}}})
-    this.store = new Storage(this.init())
+    this.init = {a: {b: {c: 1}}}
+    this.store = new Storage({value: this.init})
     this.output = null
-    this.store._stream.subscribe(x => this.output = x)
+    this.store.connect().subscribe(x => this.output = x)
   })
 
   describe('updateStore()', function () {
     it('sets initial values', function () {
-      this.store._value.should.deep.equal(this.init())
+      this.output.should.deep.equal(this.init)
     })
     it('updates the store', function () {
       this.store.updateStore({a: 2})
@@ -25,51 +27,17 @@ describe('Storage', function () {
         .should.equal(this.output)
     })
     it('does not update the store', function () {
-      this.store.updateStore(this.init())
+      this.store.updateStore(this.init)
       const a = this.output
-      this.store.updateStore(this.init())
+      this.store.updateStore(this.init)
       const b = this.output
       a.should.equal(b)
     })
     it('override values', function () {
       const t = {x: {a: 1, b: 2, c: 3}}
-      const store = new Storage(t)
+      const store = new Storage({value: {}, get})
       store.updateStore(t).should.deep.equal(t)
       store.updateStore({x: {a: 1, c: 3}}, false).should.deep.equal({x: {a: 1, c: 3}})
-    })
-  })
-  describe('updatePath()', function () {
-    it('updates on path', function () {
-      this.store.updatePath('a.b.c', 100)
-      this.output.should.deep.equal({a: {b: {c: 100}}})
-    })
-  })
-
-  describe('togglePath()', function () {
-    it('toggles on path', function () {
-      this.store.togglePath('a.b.c')
-      this.output.a.b.c.should.equal(false)
-      this.store.togglePath('a.b.c')
-      this.output.a.b.c.should.equal(true)
-    })
-  })
-
-  describe('incrementPath()', function () {
-    it('increments path', function () {
-      this.store.incrementPath('a.b.c')
-      this.output.a.b.c.should.equal(2)
-      this.store.incrementPath('a.b.c')
-      this.store.incrementPath('a.b.c')
-      this.output.a.b.c.should.equal(4)
-    })
-  })
-  describe('decrementPath()', function () {
-    it('increments path', function () {
-      this.store.decrementPath('a.b.c')
-      this.output.a.b.c.should.equal(0)
-      this.store.decrementPath('a.b.c')
-      this.store.decrementPath('a.b.c')
-      this.output.a.b.c.should.equal(-2)
     })
   })
   describe('connect()', function () {
@@ -79,18 +47,18 @@ describe('Storage', function () {
         b: {bb: {bbb: 100}},
         c: {cc: {ccc: 1000}}
       }
-      this.store = new Storage(this.init)
+      this.store = new Storage({value: Immutable(this.init), get})
     })
     it('can selectively connect to paths', function () {
       const output = []
-      this.store
-        .connect({a: 'a.aa.aaa', c: 'c.cc'})
-        .subscribe(x => output.push(x))
-      this.store.updatePath('a.aa.aaa', 2)
-      this.store.updatePath('a.aa.aaa', 3)
+      const proxy = (path, value) => set({}, path, value)
+      this.store.connect({a: 'a.aa.aaa', c: 'c.cc'}).subscribe(x => output.push(x))
 
-      this.store.updatePath('b.bb.bbb', 200)
-      this.store.updatePath('c.cc.ccc', 2000)
+      this.store.updateStore(s => s.merge(proxy('a.aa.aaa', 2), {deep: true}))
+      this.store.updateStore(s => s.merge(proxy('a.aa.aaa', 3), {deep: true}))
+      this.store.updateStore(s => s.merge(proxy('b.bb.bbb', 200), {deep: true}))
+      this.store.updateStore(s => s.merge(proxy('c.cc.ccc', 2000), {deep: true}))
+
       output.should.deep.equal([
         {a: 1, c: {ccc: 1000}},
         {a: 2, c: {ccc: 1000}},
