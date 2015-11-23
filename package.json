@@ -1,6 +1,6 @@
 {
   "name": "reactive-storage",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "A library to assist in having a reactive immutable storage as a stream",
   "main": ".dist/Storage.js",
   "scripts": {
