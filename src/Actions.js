@@ -14,4 +14,4 @@ class Action {
 
 export const createAction = (stream) => new Action(stream)
 export const INIT = createAction()
-export const createActionStream = () => new BehaviorSubject({action: INIT, params: {}})
+export const createActionStream = (params) => new BehaviorSubject({action: INIT, params})
