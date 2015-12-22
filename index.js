@@ -16,6 +16,7 @@ export const createStoreAsStream = value => {
         value = _value
         stream.onNext(value)
       }
+      return stream
     }
   }
 }
