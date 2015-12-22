@@ -1,22 +1,18 @@
 {
   "name": "reactive-storage",
-  "version": "1.4.3",
-  "description": "A library to assist in having a reactive immutable storage as a stream",
-  "main": ".dist/Storage.js",
+  "version": "2.0.0",
+  "description": "a simple store that is ",
+  "main": ".dist/index.js",
   "scripts": {
-    "test": "mocha",
-    "prepublish": "node ./node_modules/babel/bin/babel.js src --out-dir .dist"
+    "prepublish": "node ./node_modules/babel/bin/babel.js index.js --out-dir .dist"
   },
   "author": "tusharmath@gmail.com",
   "license": "ISC",
   "devDependencies": {
-    "chai": "^3.3.0",
     "babel": "^5.8.23"
   },
   "dependencies": {
-    "lodash": "^3.10.1",
-    "rx": "^4.0.6",
-    "seamless-immutable": "^4.0.2"
+    "rx": "^4.0.6"
   },
   "standard": {
     "globals": [
