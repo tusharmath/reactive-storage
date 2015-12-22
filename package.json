@@ -20,5 +20,6 @@
       "it",
       "beforeEach"
     ]
-  }
+  },
+  "repository": "https://github.com/tusharmath/reactive-storage"
 }
