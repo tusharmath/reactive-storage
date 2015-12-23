@@ -2,10 +2,7 @@
   "name": "reactive-storage",
   "version": "2.0.3",
   "description": "a simple store that is ",
-  "main": ".dist/index.js",
-  "scripts": {
-    "prepublish": "node ./node_modules/babel/bin/babel.js index.js --out-dir .dist"
-  },
+  "main": "./index.js",
   "author": "tusharmath@gmail.com",
   "license": "ISC",
   "devDependencies": {
@@ -13,13 +10,6 @@
   },
   "dependencies": {
     "rx": "^4.0.6"
-  },
-  "standard": {
-    "globals": [
-      "describe",
-      "it",
-      "beforeEach"
-    ]
   },
   "repository": "https://github.com/tusharmath/reactive-storage"
 }

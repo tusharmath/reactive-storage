@@ -4,9 +4,9 @@
 
 'use strict'
 
-import {BehaviorSubject} from 'rx'
+const BehaviorSubject = require('rx').BehaviorSubject
 
-export const createStoreAsStream = value => {
+exports.createStoreAsStream = value => {
   const stream = new BehaviorSubject(value)
   return {
     getStream: () => stream,
