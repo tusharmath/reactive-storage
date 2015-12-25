@@ -1,7 +1,5 @@
 # Reactive Storage
 
-*Version 1 has been deprecated for being toooooo opinionated* 
-
 Exposes a simple function to create a stream from any immutable data store. The stream emits a value only if there is a change.
 
 ### Installation
