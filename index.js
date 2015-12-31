@@ -11,18 +11,24 @@ exports.createStoreAsStream = (value) => {
   if (value === undefined) {
     value = ignoredValues
   }
-  const history = [value]
+  const UNDO_HISTORY = []
+  const REDO_HISTORY = []
+
   const stream = new BehaviorSubject(value)
   const dispatchValue = (_value, push) => {
     var valueIsDefined = _value !== undefined
     var valueIsDifferent = value !== _value
     var pushIsTrue = push === true
 
+    if (valueIsDefined && push === false) {
+      REDO_HISTORY.push(value)
+    }
+
     if (valueIsDefined && valueIsDifferent) {
-      value = _value
-      if (pushIsTrue) {
-        history.push(value)
+      if (pushIsTrue && value !== ignoredValues) {
+        UNDO_HISTORY.push(value)
       }
+      value = _value
       stream.onNext(value)
     }
   }
@@ -32,6 +38,11 @@ exports.createStoreAsStream = (value) => {
       dispatchValue(typeof cb === 'function' ? cb(value) : cb, true)
       return stream
     },
-    undo: () => dispatchValue(history.pop(), false)
+    undo: () => {
+      dispatchValue(UNDO_HISTORY.pop(), false)
+    },
+    redo: () => {
+      dispatchValue(REDO_HISTORY.pop(), true)
+    }
   }
 }
