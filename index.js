@@ -6,30 +6,32 @@
 
 const BehaviorSubject = require('rx').BehaviorSubject
 
-exports.createStoreAsStream = (value, options) => {
-  const history = value ? [value] : []
+exports.createStoreAsStream = (value) => {
+  const ignoredValues = {}
+  if (value === undefined) {
+    value = ignoredValues
+  }
+  const history = [value]
   const stream = new BehaviorSubject(value)
-
   const dispatchValue = (_value, push) => {
-    if (_value === undefined) {
-      return
-    }
-    if (value !== _value) {
+    var valueIsDefined = _value !== undefined
+    var valueIsDifferent = value !== _value
+    var pushIsTrue = push === true
+
+    if (valueIsDefined && valueIsDifferent) {
       value = _value
-      if (push === true) {
+      if (pushIsTrue) {
         history.push(value)
       }
       stream.onNext(value)
     }
   }
   return {
-    getStream: () => stream,
+    getStream: () => stream.filter(x => x !== ignoredValues),
     update: cb => {
       dispatchValue(typeof cb === 'function' ? cb(value) : cb, true)
       return stream
     },
-    undo: () => {
-      dispatchValue(history.pop(), false)
-    }
+    undo: () => dispatchValue(history.pop(), false)
   }
 }

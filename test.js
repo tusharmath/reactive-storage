@@ -7,6 +7,15 @@
 import test from 'ava'
 import {createStoreAsStream} from './'
 
+test('constructor()', t => {
+  const out = []
+  const store = createStoreAsStream()
+  store.getStream().subscribe(x => out.push(x))
+  store.update(x => 200)
+  store.update(x => 300)
+  t.same(out, [200, 300])
+})
+
 test('update(function)', t => {
   const out = []
   const store = createStoreAsStream(100)
