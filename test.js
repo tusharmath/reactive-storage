@@ -33,3 +33,18 @@ test('update(value):distinct', t => {
   store.update(200)
   t.same(out, [100, 200])
 })
+
+test('undo()', t => {
+  const out = []
+  const store = createStoreAsStream(100)
+  store.getStream().subscribe(x => out.push(x))
+  store.update(200)
+  store.update(300)
+  store.update(400)
+  store.undo()
+  store.undo()
+  store.undo()
+  store.undo()
+  store.undo()
+  t.same(out, [100, 200, 300, 400, 300, 200, 100])
+})
