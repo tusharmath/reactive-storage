@@ -11,8 +11,8 @@ exports.createStoreAsStream = (value) => {
   if (value === undefined) {
     value = ignoredValues
   }
-  const UNDO_HISTORY = []
-  const REDO_HISTORY = []
+  var UNDO_HISTORY = []
+  var REDO_HISTORY = []
 
   const stream = new BehaviorSubject(value)
   const dispatchValue = (_value, push) => {
@@ -35,6 +35,7 @@ exports.createStoreAsStream = (value) => {
   return {
     getStream: () => stream.filter(x => x !== ignoredValues),
     update: cb => {
+      REDO_HISTORY = []
       dispatchValue(typeof cb === 'function' ? cb(value) : cb, true)
       return stream
     },

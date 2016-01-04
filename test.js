@@ -69,7 +69,7 @@ test('undo()', t => {
   t.same(out, [100, 200, 300, 400, 300, 200, 100])
 })
 
-test('redo()', t => {
+test('redo+undo', t => {
   const out = []
   const store = createStoreAsStream()
   store.getStream().subscribe(x => out.push(x))
@@ -89,4 +89,20 @@ test('redo()', t => {
   store.undo() // (noop)
 
   t.same(out, [100, 200, 300, 200, 100, 200, 300, 200, 100])
+})
+
+test('redo+undo+update', t => {
+  const out = []
+  const store = createStoreAsStream()
+  store.getStream().subscribe(x => out.push(x))
+  store.update(100)
+  store.update(200)
+  store.update(300)
+  store.undo()
+  store.update(500)
+  store.redo()
+  store.undo()
+  store.undo()
+  store.redo()
+  t.same(out, [100, 200, 300, 200, 500, 200, 100, 200])
 })
