@@ -31,4 +31,10 @@ store.getStream().subscribe(x => console.log(x))
 
 store.update(x => x.set('a', 100)
 
+/*
+* We can also pass direct values to the store.
+* CAUTION: This approach is only good for immutables suchs as - Number, Boolean, String etc. Use a library like ImmutableJS to work with complex data structures.
+*/
+
+store.update(100)
 ```
