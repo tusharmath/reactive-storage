@@ -1,4 +1,4 @@
-# Reactive Storage
+# Reactive Storage [![Build Status](https://travis-ci.org/tusharmath/reactive-storage.svg?branch=master)](https://travis-ci.org/tusharmath/reactive-storage)
 
 Exposes a simple function to create a stream from any immutable data store. The stream emits a value only if there is a change.
 
