@@ -37,4 +37,17 @@ store.update(x => x.set('a', 100)
 */
 
 store.update(100)
+
+
+/*
+* By default the storage keeps a history of all the changes that were ever made. They can be accessed via undo() and redo() methods.
+*/
+store.undo()
+store.redo()
 ```
+
+## API
+`update(function|object)`: Used to update the given stream with a particular value. If the type of the param is `function` then it will be called with the most recent value as the first param. The return value of the function will be used as the updated value and if it is different to the one before, it will also dispatch it onto the stream.
+`undo()`: Dispatches a value one before to current one.
+`redo()`: Dispatches the value that was dispatched just before the last undo was fired.
+`getStream()`: Exposes the store as a stream. Useful for [react-announce-connect](https://travis-ci.org/tusharmath/react-announce-connect)
