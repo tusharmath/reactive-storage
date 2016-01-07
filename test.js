@@ -5,11 +5,11 @@
 'use strict'
 
 import test from 'ava'
-import {createStoreAsStream} from './'
+import {createStoreStream} from './'
 
 test('constructor()', t => {
   const out = []
-  const store = createStoreAsStream()
+  const store = createStoreStream()
   store.getStream().subscribe(x => out.push(x))
   store.update(x => 200)
   store.update(x => 300)
@@ -18,7 +18,7 @@ test('constructor()', t => {
 
 test('update(function)', t => {
   const out = []
-  const store = createStoreAsStream(100)
+  const store = createStoreStream(100)
   store.getStream().subscribe(x => out.push(x))
   store.update(x => 200)
   store.update(x => 300)
@@ -27,7 +27,7 @@ test('update(function)', t => {
 
 test('update(value)', t => {
   const out = []
-  const store = createStoreAsStream(100)
+  const store = createStoreStream(100)
   store.getStream().subscribe(x => out.push(x))
   store.update(200)
   store.update(300)
@@ -36,7 +36,7 @@ test('update(value)', t => {
 
 test('update(value):distinct', t => {
   const out = []
-  const store = createStoreAsStream(100)
+  const store = createStoreStream(100)
   store.getStream().subscribe(x => out.push(x))
   store.update(200)
   store.update(200)
@@ -45,7 +45,7 @@ test('update(value):distinct', t => {
 
 test('update(undefined)', t => {
   const out = []
-  const store = createStoreAsStream(100)
+  const store = createStoreStream(100)
   store.getStream().subscribe(x => out.push(x))
   store.update(200)
   store.update()

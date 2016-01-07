@@ -6,7 +6,7 @@
 
 const BehaviorSubject = require('rx').BehaviorSubject
 
-exports.createStoreAsStream = (value) => {
+exports.createStoreStream = (value) => {
   const ignoredValues = {}
   if (value === undefined) {
     value = ignoredValues
@@ -23,8 +23,7 @@ exports.createStoreAsStream = (value) => {
   }
   return {
     getStream: () => stream.filter(x => x !== ignoredValues),
-    update: cb => {
-      dispatchValue(typeof cb === 'function' ? cb(value) : cb, true)
-    }
+    set: cb => dispatchValue(typeof cb === 'function' ? cb(value) : cb, true),
+    get: () => value
   }
 }
