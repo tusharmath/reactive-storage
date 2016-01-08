@@ -8,6 +8,6 @@ git config push.default matching
 
 echo "//registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN" > ~/.npmrc
 npm version $NPM_RELEASE -m "$NPM_RELEASE %s [skip ci]"
-git push $REMOTE_URL HEAD:$WERCKER_GIT_BRANCH --tags
+git push $REMOTE_URL HEAD:$WERCKER_GIT_BRANCH --all
 npm publish
 
