@@ -3,7 +3,7 @@
  */
 
 'use strict'
-
+const _ = require('lodash')
 const BehaviorSubject = require('rx').BehaviorSubject
 
 exports.createStoreStream = (value, limit) => {
@@ -17,21 +17,25 @@ exports.createStoreStream = (value, limit) => {
 
   const stream = new BehaviorSubject(value)
   const dispatchValue = (_value, push) => {
-    var valueIsDefined = _value !== undefined
-    var valueIsDifferent = value !== _value
-    var pushIsTrue = push === true
+    var isDefined = _value !== undefined
+    var isDiff = value !== _value
+    var isPushable = push === true
+    var isNotIgnored = value !== ignoredValues
 
-    if (valueIsDefined && push === false) {
+    if (_.all([isDefined, !isPushable])) {
       REDO_HISTORY.push(value)
     }
 
-    if (valueIsDefined && valueIsDifferent) {
-      if (pushIsTrue && value !== ignoredValues) {
-        UNDO_HISTORY.push(value)
-        if (UNDO_HISTORY.length > limit) {
-          UNDO_HISTORY.shift()
-        }
-      }
+    if (_.all([isDefined, isDiff, isPushable, isNotIgnored])) {
+      UNDO_HISTORY.push(value)
+    }
+
+    var queueIsOversize = UNDO_HISTORY.length > limit
+    if (_.all([isDefined, isDiff, isPushable, isNotIgnored, queueIsOversize])) {
+      UNDO_HISTORY.shift()
+    }
+
+    if (_.all([isDefined, isDiff])) {
       value = _value
       stream.onNext(value)
     }
