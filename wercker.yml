@@ -19,3 +19,13 @@ build:
         code: |
           echo "node version $(node -v) running"
           echo "npm version $(npm -v) running"
+deploy:
+    steps:
+        - script:
+            name: Deploy to NPM
+            code: |
+              echo //registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN > ~/.npmrc
+              npm version prerelease
+              git push --all
+              npm publish
+
