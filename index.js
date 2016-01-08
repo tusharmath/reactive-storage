@@ -6,7 +6,8 @@
 
 const BehaviorSubject = require('rx').BehaviorSubject
 
-exports.createStoreStream = (value) => {
+exports.createStoreStream = (value, limit) => {
+  limit = limit > 0 ? limit : 100
   const ignoredValues = {}
   if (value === undefined) {
     value = ignoredValues
@@ -27,6 +28,9 @@ exports.createStoreStream = (value) => {
     if (valueIsDefined && valueIsDifferent) {
       if (pushIsTrue && value !== ignoredValues) {
         UNDO_HISTORY.push(value)
+        if (UNDO_HISTORY.length > limit) {
+          UNDO_HISTORY.shift()
+        }
       }
       value = _value
       stream.onNext(value)
@@ -40,11 +44,7 @@ exports.createStoreStream = (value) => {
       return stream
     },
     get: () => value,
-    undo: () => {
-      dispatchValue(UNDO_HISTORY.pop(), false)
-    },
-    redo: () => {
-      dispatchValue(REDO_HISTORY.pop(), true)
-    }
+    undo: () => dispatchValue(UNDO_HISTORY.pop(), false),
+    redo: () => dispatchValue(REDO_HISTORY.pop(), true)
   }
 }

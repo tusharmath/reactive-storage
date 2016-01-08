@@ -106,3 +106,19 @@ test('redo+undo+update', t => {
   store.redo()
   t.same(out, [100, 200, 300, 200, 500, 200, 100, 200])
 })
+
+test('history-limit', t => {
+  const out = []
+  const store = createStoreStream(0, 2)
+  store.getStream().subscribe(x => out.push(x))
+  store.set(100)
+  store.set(200)
+  store.set(300)
+  store.set(400)
+  store.set(500)
+  store.undo()
+  store.undo()
+  store.undo()
+  t.same(out, [0, 100, 200, 300, 400, 500, 400, 300])
+})
+
