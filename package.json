@@ -15,5 +15,16 @@
   "repository": "https://github.com/tusharmath/reactive-storage",
   "devDependencies": {
     "ava": "^0.9.1"
-  }
+  },
+  "keywords": [
+    "reactive",
+    "observable",
+    "stream",
+    "immutable",
+    "store",
+    "data",
+    "undo",
+    "redo",
+    "history"
+  ]
 }
