@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-remote="https://$WERCKER_TOKEN@github.com/tusharmath/reactive-storage.git"
+remote="https://$GH_TOKEN@github.com/tusharmath/reactive-storage.git"
 
 git config user.email "tusharmath@gmail.com"
 git config user.name "werckerbot"
