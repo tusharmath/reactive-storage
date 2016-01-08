@@ -9,7 +9,7 @@
     "rx": "^4.0.6"
   },
   "scripts": {
-    "test": "node_modules/ava/cli.js"
+    "test": "node node_modules/ava/cli.js"
   },
   "repository": "https://github.com/tusharmath/reactive-storage",
   "devDependencies": {
