@@ -1,4 +1,6 @@
-# Reactive Storage [![wercker status](https://app.wercker.com/status/23f617d64b90ce657274f7e4f346dd99/s "wercker status")](https://app.wercker.com/project/bykey/23f617d64b90ce657274f7e4f346dd99) [![npm](https://img.shields.io/npm/v/reactive-storage.svg)](reactive-storage)
+# Reactive Storage 
+[![Build Status](https://travis-ci.org/tusharmath/reactive-storage.svg?branch=master)](https://travis-ci.org/tusharmath/reactive-storage)
+[![npm](https://img.shields.io/npm/v/reactive-storage.svg)](reactive-storage)
 
 
 
