@@ -1,8 +1,11 @@
 # Reactive Storage [![Build Status](https://travis-ci.org/tusharmath/reactive-storage.svg?branch=master)](https://travis-ci.org/tusharmath/reactive-storage) [![npm](https://img.shields.io/npm/v/reactive-storage.svg)](reactive-storage)
 
 A module that does the following things —
+
 1. Exposes an immutable object as a stream.
+
 2. Stream notifies whenever there is a real change.
+
 3. Keeps a history of the changes.
 
 ### Installation
