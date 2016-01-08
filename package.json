@@ -1,6 +1,6 @@
 {
   "name": "reactive-storage",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "a simple store that is exposed as a stream",
   "main": "./index.js",
   "author": "tusharmath@gmail.com",
