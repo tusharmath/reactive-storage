@@ -39,6 +39,7 @@ exports.createStoreStream = (value) => {
       dispatchValue(typeof cb === 'function' ? cb(value) : cb, true)
       return stream
     },
+    get: () => value,
     undo: () => {
       dispatchValue(UNDO_HISTORY.pop(), false)
     },
