@@ -6,6 +6,7 @@
   "author": "tusharmath@gmail.com",
   "license": "ISC",
   "dependencies": {
+    "lodash": "^3.10.1",
     "rx": "^4.0.6"
   },
   "scripts": {
@@ -14,5 +15,16 @@
   "repository": "https://github.com/tusharmath/reactive-storage",
   "devDependencies": {
     "ava": "^0.9.1"
-  }
+  },
+  "keywords": [
+    "reactive",
+    "observable",
+    "stream",
+    "immutable",
+    "store",
+    "data",
+    "undo",
+    "redo",
+    "history"
+  ]
 }
