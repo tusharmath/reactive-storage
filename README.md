@@ -1,6 +1,9 @@
 # Reactive Storage [![Build Status](https://travis-ci.org/tusharmath/reactive-storage.svg?branch=master)](https://travis-ci.org/tusharmath/reactive-storage) [![npm](https://img.shields.io/npm/v/reactive-storage.svg)](reactive-storage)
 
-Exposes a simple function to create a stream from any immutable data store. The stream emits a value only if there is a change.
+A module that does the following things —
+1. Exposes an immutable object as a stream.
+2. Stream notifies whenever there is a real change.
+3. Keeps a history of the changes.
 
 ### Installation
 
@@ -12,10 +15,14 @@ npm install reactive-storage --save
 
 ```javascript
 
-import {createStoreAsStream} from 'reactive-storage'
+import {createStoreStream} from 'reactive-storage'
 import Immutable from 'seamless-immutable'
 
-const store = createStoreAsStream(new Immutable({a: 1, b: 2}))
+/*
+* The first param should be an immutable object.
+* Second param is the size limit to the history which is 1 by default.
+*/
+const store = createStoreStream(new Immutable({a: 1, b: 2}), 30)
 
 /*
 * Automatically logs every change in the store.
@@ -39,7 +46,7 @@ store.set(100)
 
 ```
 
-## API
+## Store API
 
 - `set(function|object)`: Used to update the given stream with a particular value. If the type of the param is `function` then it will be called with the most recent value as the first param. The return value of the function will be used as the updated value and if it is different to the one before, it will also dispatch it onto the stream.
 - `get()`: Returns the current value of the store.
