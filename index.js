@@ -7,7 +7,7 @@
 const BehaviorSubject = require('rx').BehaviorSubject
 
 exports.createStoreStream = (value, limit) => {
-  limit = limit > 0 ? limit : 100
+  limit = limit > 0 ? limit : 1
   const ignoredValues = {}
   if (value === undefined) {
     value = ignoredValues
