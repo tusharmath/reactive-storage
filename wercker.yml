@@ -5,6 +5,10 @@ build:
   steps:
     # A step that executes `npm install` command
     - npm-install
+    - script:
+      name: Install AVA
+      code: |
+        npm i -g ava
     # A step that executes `npm test` command
     - npm-test
 
