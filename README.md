@@ -61,4 +61,3 @@ store.set(100)
 - `redo()`: Goes forward a previous state.
 - `canUndo()`: Returns true if undo is possible.
 - `canRedo()`: Returns true if redo is possible.
-
