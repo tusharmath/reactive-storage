@@ -23,5 +23,4 @@ deploy:
     steps:
         - script:
             name: Deploy to NPM
-            code: |
-              run.sh
+            code: ./run.sh
