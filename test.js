@@ -47,20 +47,20 @@ test('undo():single', t => {
   const out = []
   const store = createStoreStream(100)
   store.getStream().subscribe(x => out.push(x))
-  store.update(200)
-  store.update(300)
-  store.update(400)
+  store.set(200)
+  store.set(300)
+  store.set(400)
   store.undo()
   t.same(out, [100, 200, 300, 400, 300])
 })
 
 test('undo()', t => {
   const out = []
-  const store = createStoreAsStream(100)
+  const store = createStoreStream(100)
   store.getStream().subscribe(x => out.push(x))
-  store.update(200)
-  store.update(300)
-  store.update(400)
+  store.set(200)
+  store.set(300)
+  store.set(400)
   store.undo()
   store.undo()
   store.undo()
@@ -71,11 +71,11 @@ test('undo()', t => {
 
 test('redo+undo', t => {
   const out = []
-  const store = createStoreAsStream()
+  const store = createStoreStream()
   store.getStream().subscribe(x => out.push(x))
-  store.update(100) // 100
-  store.update(200) // 200
-  store.update(300) // 300
+  store.set(100) // 100
+  store.set(200) // 200
+  store.set(300) // 300
   store.undo() // 200
   store.undo() // 100
   store.undo() // (noop)
@@ -93,13 +93,13 @@ test('redo+undo', t => {
 
 test('redo+undo+update', t => {
   const out = []
-  const store = createStoreAsStream()
+  const store = createStoreStream()
   store.getStream().subscribe(x => out.push(x))
-  store.update(100)
-  store.update(200)
-  store.update(300)
+  store.set(100)
+  store.set(200)
+  store.set(300)
   store.undo()
-  store.update(500)
+  store.set(500)
   store.redo()
   store.undo()
   store.undo()

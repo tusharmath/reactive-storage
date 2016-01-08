@@ -34,7 +34,7 @@ exports.createStoreStream = (value) => {
   }
   return {
     getStream: () => stream.filter(x => x !== ignoredValues),
-    update: cb => {
+    set: cb => {
       REDO_HISTORY = []
       dispatchValue(typeof cb === 'function' ? cb(value) : cb, true)
       return stream
