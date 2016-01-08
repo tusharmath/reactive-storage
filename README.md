@@ -43,7 +43,9 @@ store.set(100)
 
 - `set(function|object)`: Used to update the given stream with a particular value. If the type of the param is `function` then it will be called with the most recent value as the first param. The return value of the function will be used as the updated value and if it is different to the one before, it will also dispatch it onto the stream.
 - `get()`: Returns the current value of the store.
-- `getStream()`: Exposes the store as a stream. Useful for 
+- `getStream()`: Exposes the store as a stream. Useful for [react-announce-connect](https://travis-ci.org/tusharmath/react-announce-connect) 
 - `undo()`: Goes back a previous state.
 - `redo()`: Goes forward a previous state.
-[react-announce-connect](https://travis-ci.org/tusharmath/react-announce-connect)
+- `canUndo()`: Returns true if undo is possible.
+- `canRedo()`: Returns true if redo is possible.
+
