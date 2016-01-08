@@ -6,9 +6,8 @@ git config user.email "tusharmath@gmail.com"
 git config user.name "werckerbot"
 
 echo "//registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN" > ~/.npmrc
-npm version prerelease
-git remote add release $REMOTE_URL
-git push --tags release
-git push release
+npm version $NPM_RELEASE
+git push --tags $REMOTE_URL
+git push $REMOTE_URL
 npm publish
 
