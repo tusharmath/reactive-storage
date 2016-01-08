@@ -2,7 +2,7 @@
 
 REMOTE_URL="https://$GH_TOKEN@github.com/tusharmath/reactive-storage.git"
 
-git config user.email "tusharmath@gmail.com"
+git config user.email "pleasemailus@wercker.com"
 git config user.name "werckerbot"
 
 echo "//registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN" > ~/.npmrc
