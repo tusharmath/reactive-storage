@@ -28,14 +28,14 @@ store.getStream().subscribe(x => console.log(x))
 * Changes to the store can be made via the `update` function which takes a `callback` as a param. The `callback` is called with the current value of the store. 
 */
 
-store.update(x => x.set('a', 100)
+store.set(x => x.set('a', 100)
 
 /*
 * We can also pass direct values to the store.
 * CAUTION: This approach is only good for immutables suchs as - Number, Boolean, String etc. Use a library like ImmutableJS to work with complex data structures.
 */
 
-store.update(100)
+store.set(100)
 
 ```
 
