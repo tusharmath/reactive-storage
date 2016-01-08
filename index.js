@@ -45,6 +45,12 @@ exports.createStoreStream = (value, limit) => {
     },
     get: () => value,
     undo: () => dispatchValue(UNDO_HISTORY.pop(), false),
-    redo: () => dispatchValue(REDO_HISTORY.pop(), true)
+    redo: () => dispatchValue(REDO_HISTORY.pop(), true),
+    get canUndo () {
+      return UNDO_HISTORY.length > 0
+    },
+    get canRedo () {
+      return REDO_HISTORY.length > 0
+    }
   }
 }
