@@ -24,6 +24,8 @@ deploy:
         - script:
             name: Deploy to NPM
             code: |
+              git config --global user.email "tusharmath@gmail.com"
+              git config --global user.name "Wercker"
               echo //registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN > ~/.npmrc
               npm version prerelease
               git push --all
