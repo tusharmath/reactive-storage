@@ -7,7 +7,7 @@ const _ = require('lodash')
 const BehaviorSubject = require('rx').BehaviorSubject
 
 exports.createStoreStream = (value, limit) => {
-  limit = limit > 0 ? limit : 1
+  limit = limit > 0 ? limit : 0
   const ignoredValues = {}
   if (value === undefined) {
     value = ignoredValues
@@ -21,17 +21,17 @@ exports.createStoreStream = (value, limit) => {
     var isDiff = value !== _value
     var isPushable = push === true
     var isNotIgnored = value !== ignoredValues
+    var isHistoryEnabled = limit > 0
 
-    if (_.all([isDefined, !isPushable])) {
+    if (_.all([isHistoryEnabled, isDefined, !isPushable])) {
       REDO_HISTORY.push(value)
     }
 
-    if (_.all([isDefined, isDiff, isPushable, isNotIgnored])) {
+    if (_.all([isHistoryEnabled, isDefined, isDiff, isPushable, isNotIgnored])) {
       UNDO_HISTORY.push(value)
     }
 
-    var queueIsOversize = UNDO_HISTORY.length > limit
-    if (_.all([isDefined, isDiff, isPushable, isNotIgnored, queueIsOversize])) {
+    if (_.all([isHistoryEnabled, isDefined, isDiff, isPushable, isNotIgnored, UNDO_HISTORY.length > limit])) {
       UNDO_HISTORY.shift()
     }
 
@@ -50,6 +50,10 @@ exports.createStoreStream = (value, limit) => {
     get: () => value,
     undo: () => dispatchValue(UNDO_HISTORY.pop(), false),
     redo: () => dispatchValue(REDO_HISTORY.pop(), true),
+    reset: () => {
+      REDO_HISTORY = []
+      UNDO_HISTORY = []
+    },
     get canUndo () {
       return UNDO_HISTORY.length > 0
     },

@@ -134,9 +134,8 @@ test('history-limit:default', t => {
   store.undo()
   store.undo()
   store.undo()
-  t.same(out, [0, 100, 200, 300, 400, 500, 400])
+  t.same(out, [0, 100, 200, 300, 400, 500])
 })
-
 
 test('canUndo(),canRedo()', t => {
   const out = []
@@ -150,3 +149,14 @@ test('canUndo(),canRedo()', t => {
   t.true(store.canRedo)
 })
 
+test('reset()', t => {
+  const out = []
+  const store = createStoreStream(0, 2)
+  store.getStream().subscribe(x => out.push(x))
+  store.set(100)
+  store.set(100)
+  store.set(100)
+  store.reset()
+  t.false(store.canUndo)
+  t.false(store.canRedo)
+})
