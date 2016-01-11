@@ -1,6 +1,6 @@
 # Reactive Storage 
 [![Build Status](https://travis-ci.org/tusharmath/reactive-storage.svg?branch=master)](https://travis-ci.org/tusharmath/reactive-storage)
-[![npm](https://img.shields.io/npm/v/reactive-storage.svg)](reactive-storage)
+[![npm](https://img.shields.io/npm/v/reactive-storage.svg)](https://www.npmjs.com/package/reactive-storage)
 
 
 A module that does the following things —
