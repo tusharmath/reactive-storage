@@ -134,7 +134,7 @@ test('history-limit:default', t => {
   store.undo()
   store.undo()
   store.undo()
-  t.same(out, [0, 100, 200, 300, 400, 500, 400])
+  t.same(out, [0, 100, 200, 300, 400, 500])
 })
 
 test('canUndo(),canRedo()', t => {
