@@ -21,14 +21,14 @@ npm install reactive-storage --save
 
 ```javascript
 
-import {createStoreStream} from 'reactive-storage'
+import {create} from 'reactive-storage'
 import Immutable from 'seamless-immutable'
 
 /*
 * The first param should be an immutable object.
 * Second param is the size limit to the history which is 1 by default.
 */
-const store = createStoreStream(new Immutable({a: 1, b: 2}), 30)
+const store = create(new Immutable({a: 1, b: 2}), 30)
 
 /*
 * Automatically logs every change in the store.
@@ -67,3 +67,5 @@ store.set(100)
 - `canUndo()`: Returns true if undo is possible.
 
 - `canRedo()`: Returns true if redo is possible.
+
+- `reset()`: Resets the history.
