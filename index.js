@@ -6,7 +6,7 @@
 const _ = require('lodash')
 const BehaviorSubject = require('rx').BehaviorSubject
 
-exports.createStoreStream = (value, limit) => {
+exports.create = exports.createStoreStream = (value, limit) => {
   limit = limit > 0 ? limit : 0
   const ignoredValues = {}
   if (value === undefined) {
