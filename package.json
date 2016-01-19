@@ -1,6 +1,5 @@
 {
   "name": "reactive-storage",
-  "version": "0.7.0",
   "description": "a simple store that is exposed as a stream",
   "main": "./index.js",
   "author": "tusharmath@gmail.com",
@@ -10,11 +9,17 @@
     "rx": "^4.0.6"
   },
   "scripts": {
-    "test": "ava"
+    "test": "ava",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
-  "repository": "https://github.com/tusharmath/reactive-storage",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tusharmath/reactive-storage.git"
+  },
   "devDependencies": {
-    "ava": "^0.9.1"
+    "ava": "^0.9.1",
+    "cz-conventional-changelog": "^1.1.5",
+    "semantic-release": "^4.3.5"
   },
   "keywords": [
     "reactive",
@@ -26,5 +31,10 @@
     "undo",
     "redo",
     "history"
-  ]
+  ],
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
 }
