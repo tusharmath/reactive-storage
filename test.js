@@ -160,3 +160,28 @@ test('reset()', t => {
   t.false(store.canUndo)
   t.false(store.canRedo)
 })
+
+test('end()', t => {
+  const out = []
+  const store = createStoreStream(0, 2)
+  store.getStream().subscribe(
+    x => out.push(x),
+    null,
+    () => out.push('completed'))
+  store.set(100)
+  store.end()
+  t.same(out, [0, 100, 'completed'])
+})
+
+test('end():history', t => {
+  const out = []
+  const store = createStoreStream(0, 2)
+  store.getStream().subscribe(
+    x => out.push(x),
+    null,
+    () => out.push('completed'))
+  store.set(100)
+  store.end()
+  t.false(store.canUndo)
+  t.false(store.canRedo)
+})

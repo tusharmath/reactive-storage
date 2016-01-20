@@ -40,6 +40,10 @@ exports.create = exports.createStoreStream = (value, limit) => {
       stream.onNext(value)
     }
   }
+  var reset = () => {
+    REDO_HISTORY = []
+    UNDO_HISTORY = []
+  }
   return {
     getStream: () => stream.filter(x => x !== ignoredValues),
     set: cb => {
@@ -47,13 +51,14 @@ exports.create = exports.createStoreStream = (value, limit) => {
       dispatchValue(typeof cb === 'function' ? cb(value) : cb, true)
       return stream
     },
+    end: () => {
+      reset()
+      stream.onCompleted()
+    },
     get: () => value,
     undo: () => dispatchValue(UNDO_HISTORY.pop(), false),
     redo: () => dispatchValue(REDO_HISTORY.pop(), true),
-    reset: () => {
-      REDO_HISTORY = []
-      UNDO_HISTORY = []
-    },
+    reset,
     get canUndo () {
       return UNDO_HISTORY.length > 0
     },

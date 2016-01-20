@@ -71,3 +71,5 @@ store.set(100)
 - `canRedo()`: Returns true if redo is possible.
 
 - `reset()`: Resets the history.
+
+- `end()`: Ends the exposed stream and clears all history information.
