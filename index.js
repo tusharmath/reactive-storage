@@ -23,19 +23,19 @@ exports.create = exports.createStoreStream = (value, limit) => {
     var isNotIgnored = value !== ignoredValues
     var isHistoryEnabled = limit > 0
 
-    if (_.all([isHistoryEnabled, isDefined, !isPushable])) {
+    if (_.every([isHistoryEnabled, isDefined, !isPushable])) {
       REDO_HISTORY.push(value)
     }
 
-    if (_.all([isHistoryEnabled, isDefined, isDiff, isPushable, isNotIgnored])) {
+    if (_.every([isHistoryEnabled, isDefined, isDiff, isPushable, isNotIgnored])) {
       UNDO_HISTORY.push(value)
     }
 
-    if (_.all([isHistoryEnabled, isDefined, isDiff, isPushable, isNotIgnored, UNDO_HISTORY.length > limit])) {
+    if (_.every([isHistoryEnabled, isDefined, isDiff, isPushable, isNotIgnored, UNDO_HISTORY.length > limit])) {
       UNDO_HISTORY.shift()
     }
 
-    if (_.all([isDefined, isDiff])) {
+    if (_.every([isDefined, isDiff])) {
       value = _value
       stream.onNext(value)
     }
