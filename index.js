@@ -3,7 +3,6 @@
  */
 
 'use strict'
-const _ = require('lodash')
 const BehaviorSubject = require('rx').BehaviorSubject
 
 exports.create = exports.createStoreStream = (value, limit) => {
@@ -23,19 +22,19 @@ exports.create = exports.createStoreStream = (value, limit) => {
     var isNotIgnored = value !== ignoredValues
     var isHistoryEnabled = limit > 0
 
-    if (_.every([isHistoryEnabled, isDefined, !isPushable])) {
+    if ([isHistoryEnabled, isDefined, !isPushable].every(Boolean)) {
       REDO_HISTORY.push(value)
     }
 
-    if (_.every([isHistoryEnabled, isDefined, isDiff, isPushable, isNotIgnored])) {
+    if ([isHistoryEnabled, isDefined, isDiff, isPushable, isNotIgnored].every(Boolean)) {
       UNDO_HISTORY.push(value)
     }
 
-    if (_.every([isHistoryEnabled, isDefined, isDiff, isPushable, isNotIgnored, UNDO_HISTORY.length > limit])) {
+    if ([isHistoryEnabled, isDefined, isDiff, isPushable, isNotIgnored, UNDO_HISTORY.length > limit].every(Boolean)) {
       UNDO_HISTORY.shift()
     }
 
-    if (_.every([isDefined, isDiff])) {
+    if ([isDefined, isDiff].every(Boolean)) {
       value = _value
       stream.onNext(value)
     }
