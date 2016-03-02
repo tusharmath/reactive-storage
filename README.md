@@ -1,12 +1,15 @@
 # Reactive Storage
 [![Build Status][travis-svg]][travis]
 [![npm][npm-svg]][npm]
+[![Coverage Status][coveralls-svg]][coveralls]
+
 
 [travis-svg]: https://travis-ci.org/tusharmath/reactive-storage.svg?branch=master
 [travis]: https://travis-ci.org/tusharmath/reactive-storage
 [npm-svg]: https://img.shields.io/npm/v/reactive-storage.svg
 [npm]: https://www.npmjs.com/package/reactive-storage
-
+[coveralls]: https://coveralls.io/github/tusharmath/reactive-storage?branch=develop
+[coveralls-svg]: https://coveralls.io/repos/github/tusharmath/reactive-storage/badge.svg?branch=develop
 
 
 A module that does the following things —
