@@ -14,7 +14,7 @@ exports.create = exports.createStoreStream = (value, limit) => {
   var UNDO_HISTORY = []
   var REDO_HISTORY = []
 
-  const stream = new BehaviorSubject(value)
+  const subject = new BehaviorSubject(value)
   const dispatchValue = (_value, push) => {
     var isDefined = _value !== undefined
     var isDiff = value !== _value
@@ -36,24 +36,24 @@ exports.create = exports.createStoreStream = (value, limit) => {
 
     if ([isDefined, isDiff].every(Boolean)) {
       value = _value
-      stream.onNext(value)
+      subject.onNext(value)
     }
   }
   const reset = () => {
     REDO_HISTORY = []
     UNDO_HISTORY = []
   }
-  const _stream = stream.filter(x => x !== ignoredValues)
+
   return {
-    stream: _stream,
+    stream: subject.filter(x => x !== ignoredValues),
     set: cb => {
       REDO_HISTORY = []
       dispatchValue(typeof cb === 'function' ? cb(value) : cb, true)
-      return stream
+      return subject
     },
     end: () => {
       reset()
-      stream.onCompleted()
+      subject.onCompleted()
     },
     get: () => value,
     undo: () => dispatchValue(UNDO_HISTORY.pop(), false),
