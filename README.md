@@ -1,4 +1,4 @@
-# Reactive Storage 
+# Reactive Storage
 [![Build Status](https://travis-ci.org/tusharmath/reactive-storage.svg?branch=master)](https://travis-ci.org/tusharmath/reactive-storage)
 [![npm](https://img.shields.io/npm/v/reactive-storage.svg)](https://www.npmjs.com/package/reactive-storage)
 
@@ -36,11 +36,11 @@ const store = create(new Immutable({a: 1, b: 2}), 30)
 * Automatically logs every change in the store.
 * Change detection is done via `===` comparison between the initial and the final store values.
 */
-store.getStream().subscribe(x => console.log(x))
+store.stream.subscribe(x => console.log(x))
 
 
 /*
-* Changes to the store can be made via the `update` function which takes a `callback` as a param. The `callback` is called with the current value of the store. 
+* Changes to the store can be made via the `update` function which takes a `callback` as a param. The `callback` is called with the current value of the store.
 */
 
 store.set(x => x.set('a', 100)
@@ -60,7 +60,7 @@ store.set(100)
 
 - `get()`: Returns the current value of the store.
 
-- `getStream()`: Exposes the store as a stream. Useful for [react-announce-connect](https://travis-ci.org/tusharmath/react-announce-connect) 
+- `stream`: Exposes the store as a stream. Useful for [react-announce-connect](https://travis-ci.org/tusharmath/react-announce-connect) 
 
 - `undo()`: Goes back a previous state.
 

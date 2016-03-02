@@ -39,12 +39,13 @@ exports.create = exports.createStoreStream = (value, limit) => {
       stream.onNext(value)
     }
   }
-  var reset = () => {
+  const reset = () => {
     REDO_HISTORY = []
     UNDO_HISTORY = []
   }
+  const _stream = stream.filter(x => x !== ignoredValues)
   return {
-    getStream: () => stream.filter(x => x !== ignoredValues),
+    stream: _stream,
     set: cb => {
       REDO_HISTORY = []
       dispatchValue(typeof cb === 'function' ? cb(value) : cb, true)

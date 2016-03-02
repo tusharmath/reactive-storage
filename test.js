@@ -10,7 +10,7 @@ import {createStoreStream} from './'
 test('constructor()', t => {
   const out = []
   const store = createStoreStream()
-  store.getStream().subscribe(x => out.push(x))
+  store.stream.subscribe(x => out.push(x))
   store.set(x => 200)
   store.set(x => 300)
   t.same(out, [200, 300])
@@ -19,7 +19,7 @@ test('constructor()', t => {
 test('update(function)', t => {
   const out = []
   const store = createStoreStream(100)
-  store.getStream().subscribe(x => out.push(x))
+  store.stream.subscribe(x => out.push(x))
   store.set(x => 200)
   store.set(x => 300)
   t.same(out, [100, 200, 300])
@@ -28,7 +28,7 @@ test('update(function)', t => {
 test('update(value)', t => {
   const out = []
   const store = createStoreStream(100)
-  store.getStream().subscribe(x => out.push(x))
+  store.stream.subscribe(x => out.push(x))
   store.set(200)
   store.set(300)
   t.same(out, [100, 200, 300])
@@ -37,7 +37,7 @@ test('update(value)', t => {
 test('update(value):distinct', t => {
   const out = []
   const store = createStoreStream(100)
-  store.getStream().subscribe(x => out.push(x))
+  store.stream.subscribe(x => out.push(x))
   store.set(200)
   store.set(200)
   t.same(out, [100, 200])
@@ -46,7 +46,7 @@ test('update(value):distinct', t => {
 test('undo():single', t => {
   const out = []
   const store = createStoreStream(100, 100)
-  store.getStream().subscribe(x => out.push(x))
+  store.stream.subscribe(x => out.push(x))
   store.set(200)
   store.set(300)
   store.set(400)
@@ -57,7 +57,7 @@ test('undo():single', t => {
 test('undo()', t => {
   const out = []
   const store = createStoreStream(100, 100)
-  store.getStream().subscribe(x => out.push(x))
+  store.stream.subscribe(x => out.push(x))
   store.set(200)
   store.set(300)
   store.set(400)
@@ -72,7 +72,7 @@ test('undo()', t => {
 test('redo+undo', t => {
   const out = []
   const store = createStoreStream(void 0, 100)
-  store.getStream().subscribe(x => out.push(x))
+  store.stream.subscribe(x => out.push(x))
   store.set(100) // 100
   store.set(200) // 200
   store.set(300) // 300
@@ -94,7 +94,7 @@ test('redo+undo', t => {
 test('redo+undo+update', t => {
   const out = []
   const store = createStoreStream(void 0, 100)
-  store.getStream().subscribe(x => out.push(x))
+  store.stream.subscribe(x => out.push(x))
   store.set(100)
   store.set(200)
   store.set(300)
@@ -110,7 +110,7 @@ test('redo+undo+update', t => {
 test('history-limit:2', t => {
   const out = []
   const store = createStoreStream(0, 2)
-  store.getStream().subscribe(x => out.push(x))
+  store.stream.subscribe(x => out.push(x))
   store.set(100)
   store.set(200)
   store.set(300)
@@ -125,7 +125,7 @@ test('history-limit:2', t => {
 test('history-limit:default', t => {
   const out = []
   const store = createStoreStream(0)
-  store.getStream().subscribe(x => out.push(x))
+  store.stream.subscribe(x => out.push(x))
   store.set(100)
   store.set(200)
   store.set(300)
@@ -140,7 +140,7 @@ test('history-limit:default', t => {
 test('canUndo(),canRedo()', t => {
   const out = []
   const store = createStoreStream(0, 2)
-  store.getStream().subscribe(x => out.push(x))
+  store.stream.subscribe(x => out.push(x))
   store.set(100)
   t.true(store.canUndo)
   t.false(store.canRedo)
@@ -152,7 +152,7 @@ test('canUndo(),canRedo()', t => {
 test('reset()', t => {
   const out = []
   const store = createStoreStream(0, 2)
-  store.getStream().subscribe(x => out.push(x))
+  store.stream.subscribe(x => out.push(x))
   store.set(100)
   store.set(100)
   store.set(100)
@@ -164,7 +164,7 @@ test('reset()', t => {
 test('end()', t => {
   const out = []
   const store = createStoreStream(0, 2)
-  store.getStream().subscribe(
+  store.stream.subscribe(
     x => out.push(x),
     null,
     () => out.push('completed'))
@@ -176,7 +176,7 @@ test('end()', t => {
 test('end():history', t => {
   const out = []
   const store = createStoreStream(0, 2)
-  store.getStream().subscribe(
+  store.stream.subscribe(
     x => out.push(x),
     null,
     () => out.push('completed'))
@@ -184,4 +184,9 @@ test('end():history', t => {
   store.end()
   t.false(store.canUndo)
   t.false(store.canRedo)
+})
+
+test('stream:same instance', t => {
+  const store = createStoreStream(1)
+  t.same(store.stream, store.stream)
 })
