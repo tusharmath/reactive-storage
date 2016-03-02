@@ -1,6 +1,12 @@
 # Reactive Storage
-[![Build Status](https://travis-ci.org/tusharmath/reactive-storage.svg?branch=master)](https://travis-ci.org/tusharmath/reactive-storage)
-[![npm](https://img.shields.io/npm/v/reactive-storage.svg)](https://www.npmjs.com/package/reactive-storage)
+[![Build Status][travis-svg]][travis]
+[![npm][npm-svg]][npm]
+
+[travis-svg]: https://travis-ci.org/tusharmath/reactive-storage.svg?branch=master
+[travis]: https://travis-ci.org/tusharmath/reactive-storage
+[npm-svg]: https://img.shields.io/npm/v/reactive-storage.svg
+[npm]: https://www.npmjs.com/package/reactive-storage
+
 
 
 A module that does the following things —
@@ -60,7 +66,7 @@ store.set(100)
 
 - `get()`: Returns the current value of the store.
 
-- `stream`: Exposes the store as a stream. Useful for [react-announce-connect](https://travis-ci.org/tusharmath/react-announce-connect) 
+- `stream`: Exposes the store as a stream. Useful for [react-announce-connect](https://travis-ci.org/tusharmath/react-announce-connect)
 
 - `undo()`: Goes back a previous state.
 
