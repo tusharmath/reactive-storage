@@ -20,7 +20,7 @@ A module that does the following things —
 
 3. Keeps a history of the changes.
 
-4. [irecord](https://github.com/ericelliott/irecord) is awesome, but only works with [immutableJS](https://github.com/facebook/immutable-js), reactive-storage on the other hand lets the developer decide the immutable library he wants to integrate with. Infact you can even use it with primitive immutables such as RegEx, String, Date, Number etc. and not depend on any external libraries at all.
+4. [irecord](https://github.com/ericelliott/irecord) is awesome, but only works with [immutableJS](https://github.com/facebook/immutable-js), reactive-storage on the other hand lets the developer decide the immutable library they want to integrate with. Infact you can even use it with primitive immutables such as `RegEx`, `String`, `Date`, `Number` etc. and not depend on any external libraries at all.
 
 ### Installation
 
