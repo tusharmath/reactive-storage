@@ -16,7 +16,7 @@
     "url": "https://github.com/tusharmath/reactive-storage.git"
   },
   "devDependencies": {
-    "ava": "^0.14.0",
+    "ava": "^0.15.0",
     "coveralls": "^2.11.8",
     "cz-conventional-changelog": "^1.1.5",
     "nyc": "^7.0.0",
