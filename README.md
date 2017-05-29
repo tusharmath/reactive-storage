@@ -1,4 +1,6 @@
 # Reactive Storage
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/tusharmath/reactive-storage.svg)](https://greenkeeper.io/)
 [![Build Status][travis-svg]][travis]
 [![npm][npm-svg]][npm]
 [![Coverage Status][coveralls-svg]][coveralls]
